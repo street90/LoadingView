@@ -133,6 +133,5 @@ public class CircleLoading extends View {
             postInvalidateDelayed(10);
 
 
-
     }
 }
