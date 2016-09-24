@@ -3,54 +3,53 @@ package com.song.loading;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.SweepGradient;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 /**
- * Created by song on 2016/9/22.
+ * Created by song on 2016/9/24.
  */
 
-public class CircleLoading extends View {
+public class BallLoading extends View {
+
 
     private int circleRadius = 300;
-    private Paint mCirclePaint;
-    private int startAngle = 0;
-    private SweepGradient mSweepGradient;
+
+    private int startRadius = 0;
+
     private int centerX,centerY;
-    private RectF circleBounds = new RectF();
-    private Matrix mMatrix = new Matrix();
+
+    private int startAngle = 0;
+
+    private Paint mPaint;
 
     private boolean isAdd = true;
 
-    public CircleLoading(Context context) {
+    public BallLoading(Context context) {
         super(context);
     }
 
-    public CircleLoading(Context context, AttributeSet attrs) {
+    public BallLoading(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context,attrs);
+
+        init(context, attrs);
+
     }
 
-    public CircleLoading(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BallLoading(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context,attrs);
+        init(context, attrs);
     }
 
-    private void init(Context context, AttributeSet attrs)
-    {
-        mCirclePaint = new Paint();
-        mCirclePaint.setAntiAlias(true);
-        mCirclePaint.setColor(Color.parseColor("#ff00ddff"));
-        mCirclePaint.setStyle(Paint.Style.STROKE);
-        mCirclePaint.setStrokeWidth(20);
+    private void init(Context context, AttributeSet attrs) {
+
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setColor(Color.parseColor("#ff00ddff"));
+        mPaint.setStyle(Paint.Style.FILL);
 
     }
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -99,6 +98,7 @@ public class CircleLoading extends View {
 
     }
 
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -106,41 +106,44 @@ public class CircleLoading extends View {
         centerX = w/2;
         centerY = h/2;
 
-        circleBounds.set(getPaddingLeft()+10,getPaddingTop()+10,w-getPaddingRight()-10,h-getPaddingBottom()-10);
     }
-
-    int complate = 0;
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        canvas.translate(centerX,centerY);
 
-       startAngle+= 4;
 
+        startAngle+=2;
 
         if(isAdd)
         {
-            complate+=2;
+            startRadius +=4;
         }
         else
         {
-            complate-=2;
+            startRadius-= 4;
         }
 
-        canvas.drawArc(circleBounds,startAngle,complate,false,mCirclePaint);
+        for (int i = 0; i < 4; i++) {
+            int x = (int) ((startRadius*0.5-20) * Math.cos(Math.PI*(startAngle+i*90)/180 ));
+            int y = (int) ((startRadius*0.5-20) * Math.sin(Math.PI*(startAngle+i*90)/180));
+            canvas.drawCircle(x,y,20,mPaint);
 
-
-        Log.e("CircleLoading","Circle"+startAngle);
-
-        if(complate >= 360)
-        {
-            isAdd = false;
         }
-        else if(complate <=0)
+
+        if(startRadius < 40)
         {
             isAdd = true;
         }
-            postInvalidateDelayed(5);
-    }
+        else if(startRadius >= 280)
+        {
+            isAdd = false;
+        }
 
+
+        postInvalidateDelayed(4);
+
+
+    }
 }
