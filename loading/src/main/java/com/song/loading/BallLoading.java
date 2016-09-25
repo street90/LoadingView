@@ -14,7 +14,7 @@ import android.view.View;
 public class BallLoading extends View {
 
 
-    private int circleRadius = 300;
+    private int circleD = 300;
 
     private int startRadius = 0;
 
@@ -55,8 +55,8 @@ public class BallLoading extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int viewWidth = circleRadius + this.getPaddingLeft() + this.getPaddingRight();
-        int viewHeight = circleRadius + this.getPaddingTop() + this.getPaddingBottom();
+        int viewWidth = circleD + this.getPaddingLeft() + this.getPaddingRight();
+        int viewHeight = circleD + this.getPaddingTop() + this.getPaddingBottom();
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
@@ -130,7 +130,10 @@ public class BallLoading extends View {
             int y = (int) ((startRadius*0.5-20) * Math.sin(Math.PI*(startAngle+i*90)/180));
             canvas.drawCircle(x,y,20,mPaint);
 
+            canvas.save();
         }
+
+        canvas.restore();
 
         if(startRadius < 40)
         {
