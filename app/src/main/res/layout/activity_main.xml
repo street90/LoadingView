@@ -11,28 +11,37 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.song.loadingview.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
     <com.song.loading.CircleLoading
+        android:id="@+id/id1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
+
+        android:visibility="visible"
         />
 
     <com.song.loading.BallLoading
+        android:id="@+id/id2"
+        android:layout_below="@id/id1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
+
+        android:visibility="visible"
         />
 
     <com.song.loading.LineLoading
+        android:id="@+id/id3"
+        android:layout_below="@+id/id2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="btck"
+        android:text="增加"
+        android:visibility="gone"
         />
 
 </RelativeLayout>

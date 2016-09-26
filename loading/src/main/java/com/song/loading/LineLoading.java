@@ -31,6 +31,7 @@ public class LineLoading extends View {
 
     private RectF progressRect;
 
+    private float rate = 0.0f;
 
     public LineLoading(Context context) {
         super(context);
@@ -84,7 +85,7 @@ public class LineLoading extends View {
 
         progressRect = new RectF();
         progressRect.left = 20+4;
-        progressRect.right = progressRect.left  + complete-40-8;
+        progressRect.right = progressRect.left  + mWidth*rate-40-8;
         progressRect.top = -16;
         progressRect.bottom = 16;
 
@@ -155,26 +156,27 @@ public class LineLoading extends View {
 
     }
 
-    public void setComplete(float complete) {
+    public void setComplete(float rate) {
 
         float loading = 0;
 
-        if (Float.compare(1, complete) == 0 || Float.compare(1, complete)< 0)
+        if (Float.compare(1, rate) == 0 || Float.compare(1, rate)< 0)
         {
             loading = 1;
         }
-        else if(Float.compare(0, complete)== 0 || Float.compare(0, complete) >0)
+        else if(Float.compare(0, rate)== 0 || Float.compare(0, rate) >0)
         {
             loading = 0;
         }
         else
         {
-            loading = complete;
+            loading = rate;
         }
 
-        int all = mWidth-40-8 - 20-4;
+        Log.e("LineLoading",""+rate);
 
-        progressRect.right = progressRect.left + all *complete/100;
+        this.rate = rate;
+
 
         invalidate();
 
