@@ -141,7 +141,6 @@ public class LineLoading extends View {
 
         }
 
-
         return true;
     }
 
