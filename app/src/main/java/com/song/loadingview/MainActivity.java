@@ -2,7 +2,6 @@ package com.song.loadingview;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.song.loading.LineLoading;
 
@@ -22,10 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void btck(View view)
-    {
-        loading += 0.1;
-        ll.setComplete(loading);
-    }
+
 
 }

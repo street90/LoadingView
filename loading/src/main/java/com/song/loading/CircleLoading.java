@@ -115,16 +115,18 @@ public class CircleLoading extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-       startAngle+= 4;
+
 
 
         if(isAdd)
         {
+            startAngle+= 4;
             complate+=2;
         }
         else
         {
-            complate-=2;
+            startAngle+= 8;
+            complate-=4;
         }
 
         canvas.drawArc(circleBounds,startAngle,complate,false,mCirclePaint);

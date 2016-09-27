@@ -21,6 +21,8 @@ public class LineLoading extends View {
     private int mWidth;//可以使用的宽度
     private int mHeight;//可以使用的高度
 
+    private int ProgressColor = Color.parseColor("#ff00ddff"); //进度条的颜色
+
     private Paint backlinePaint;//背景会的的画笔
 
     private Paint progressPaint;//进度使用的画笔
@@ -58,7 +60,7 @@ public class LineLoading extends View {
 
         progressPaint = new Paint();
         progressPaint.setStyle(Paint.Style.FILL);
-        progressPaint.setColor(Color.parseColor("#ff00ddff"));
+        progressPaint.setColor(ProgressColor);
         progressPaint.setStrokeWidth(SizeUtil.Dp2Px(context,2));
         progressPaint.setAntiAlias(true);
     }
@@ -155,6 +157,22 @@ public class LineLoading extends View {
 
     }
 
+
+    /**
+     * 设置进度条的颜色
+     * @param color
+     */
+    public void setProgressColor(int color)
+    {
+        ProgressColor = color;
+
+        invalidate();
+    }
+
+    /**
+     * 设置进度
+     * @param rate
+     */
     public void setComplete(float rate) {
 
         float loading = 0;
